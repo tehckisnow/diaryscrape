@@ -12,7 +12,8 @@ import json
 
 maxEp = 41
 
-def getEp(number):
+#getEp(episode number, whether or not to download(for testingss))
+def getEp(number, dl):
   #find download url
   mainUrl = 'https://darknetdiaries.com/episode/'
   number = number
@@ -25,19 +26,26 @@ def getEp(number):
   final = theText[1]
   ob = json.loads(str(final))
 
-  name = ob["episode"]["title"]
-  dlUrl = ob["episode"]["media"]["mp3"]
-  print(name + dlUrl)
+  title = str(ob["episode"]["title"])
+  name = str(title)
+  dlUrl = str(ob["episode"]["media"]["mp3"])
+  num = str(number)
+  filename = './' + num + "- " + name + '.mp3'
+  print(name + " " + dlUrl)
 
   #download
-  urllib.request.urlretrieve(dlUrl, './' + str(number) + ' - ' + name + '.mp3')
+  if(dl):
+    urllib.request.urlretrieve(dlUrl, filename)
+    #urllib.request.urlretrieve(dlUrl, './filename.mp3') #<--this works perfectly?!?
 
-def getAll():
+def getAll(dl):
   i = 1
   while i <= maxEp:
-    getEp(i)
+    getEp(i, dl)
     i += 1
 
 
-#getEp(1)
-getAll()
+#getEp(1, True)
+#getAll(False)
+
+#urllib.request.urlretrieve('http://traffic.megaphone.fm/ADV3675761065.mp3', './file.mp3')
