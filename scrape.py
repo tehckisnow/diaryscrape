@@ -30,9 +30,10 @@ def getEp(number, dl):
   name = str(title)
   dlUrl = str(ob["episode"]["media"]["mp3"])
   num = str(number)
-  filename = './' + num + "- " + name + '.mp3'
+  filename = "./" + num + "- " + name + ".mp3"
   print(name + " " + dlUrl)
-
+  print(filename)
+  
   #download
   if(dl):
     urllib.request.urlretrieve(dlUrl, filename)
@@ -45,7 +46,7 @@ def getAll(dl):
     i += 1
 
 
-#getEp(1, True)
+getEp(1, True)
 #getAll(False)
 
 #urllib.request.urlretrieve('http://traffic.megaphone.fm/ADV3675761065.mp3', './file.mp3')
